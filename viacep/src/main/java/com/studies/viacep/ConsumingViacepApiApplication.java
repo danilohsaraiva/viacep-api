@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import service.ViaCepService;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class ConsumingViacepApiApplication {
@@ -17,6 +19,17 @@ public class ConsumingViacepApiApplication {
 			Address endereco = service.getEndereco("38360000");
 			System.out.println(endereco.toString());
 		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+		try {
+			List<Address> addresses = new ArrayList<>();
+			addresses = service.findAddress("RS","Porto Alegre", "Domingos Jose");
+			for (Address addres: addresses
+				 ) {
+				System.out.println(addres.toString());
+			}
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 
